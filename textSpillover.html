@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			width: 200px;
+			height: 140px;
+			margin: 150px auto;
+		}
+		.d1{
+			width: 150px;
+			height: 34px;
+			font-size: 16px;
+			line-height: 34px;
+			border: 1px solid #666666;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		.d2{
+			width: 150px;
+			height: 68px;
+			border: 1px solid #666666;
+			margin-top: 35px;
+		}
+		.d2 p{
+			font-size: 16px;
+			line-height: 22px;
+		}
+		
+		.d3{
+			width: 150px;
+			/*height: 68px;*/
+			border: 1px solid #666666;
+			margin-top: 35px;
+			font-size: 16px;
+			line-height: 22px;
+		}
+	</style>
+	<script src="jquery-1.10.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="clamp.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div class="box">
+		<div class="d1">
+			这是单行文本溢出隐藏并显示省略号。就是测去问问去玩儿去文如其人
+			就是测去问问去玩儿去文如其人就是测去问问去玩儿去文如其人就是测
+			去问问去玩儿去文如其人就是测去问问去玩儿去文如其人就是测去问问
+			去玩儿去文如其人就是测去问问去玩儿去文如其人就是测去问问去玩儿
+			去文如其人就是测去问问去问问去玩儿去文如其人就是测去问问去玩儿
+			去文
+		</div>
+		<div class="d2">
+			<p>
+				这是多行文本溢出隐藏并显示省略号。就是测去问问去玩儿去文如其人
+				就是测去问问去玩儿去文如其人就是测去问问去玩儿去文如其人就是测
+				去问问去玩儿去文如其人就是测去问问去玩儿去文如其人就是测去问问
+				去玩儿去文如其人就是测去问问去玩儿去文如其人就是测去问问去玩儿
+				去文如其人就是测去问问去问问去玩儿去文如其人就是测去问问去玩儿
+				去文
+			</p>
+		</div>
+		
+		<div class="d3" id="d3">
+			这是多行文本溢出隐藏并显示省略号。就是测去问问去玩儿去文如其人
+			就是测去问问去玩儿去文如其人就是测去问问去玩儿去文如其人就是测
+			去问问去玩儿去文如其人就是测去问问去玩儿去文如其人就是测去问问
+			去玩儿去文如其人就是测去问问去玩儿去文如其人就是测去问问去玩儿
+			去文如其人就是测去问问去问问去玩儿去文如其人就是测去问问去玩儿
+			去文
+		</div>
+		
+		<div class="d3" id="d4">
+			这是多行文本溢出隐藏并显示省略号。就是测去问问去玩儿去文如其人
+			就是测去问问去玩儿去文如其人就是测去问问去玩儿去文如其人就是测
+			去问问去玩儿去文如其人就是测去问问去玩儿去文如其人就是测去问问
+			去玩儿去文如其人就是测去问问去玩儿去文如其人就是测去问问去玩儿
+			去文如其人就是测去问问去问问去玩儿去文如其人就是测去问问去玩儿
+			去文
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	
+	$(function(){
+		//显示固定高度
+		$(".d2").each(function(i){
+		    var divH = $(this).height();
+		    var $p = $("p", $(this)).eq(0);
+		    while ($p.outerHeight() > divH) {
+		        $p.text($p.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));
+		    };
+		});
+		
+		//显示固定行数
+		var d3 = document.getElementById("d3");    
+        $clamp(d3, {clamp: 4});
+        
+        //显示固定字数（空格、换行及标点符号都在其中）
+        var d4 = document.getElementById("d4");
+        var n = d4.innerHTML.length;
+        if(n > 35){
+        	var str = d4.innerHTML.substring(0, 35);
+        	d4.innerHTML = str + '…';
+        }
+		
+	})
+	
+</script>
